@@ -70,6 +70,7 @@ int main( int argc, char **argv )
         printf( "    LEFT TRIGGER - Brake\n" );
         printf( "    RIGHT TRIGGER - Throttle\n" );
         printf( "    LEFT STICK - Steering\n" );
+        printf( "    A-B-X-Y - Selector control (P-R-N-D)\n" );
 
         while ( ret == OSCC_OK && error_thrown == OSCC_OK )
         {
