@@ -528,10 +528,10 @@ static void fault_callback(oscc_fault_report_s *report) {
 // To cast specific OBD messages, you need to know the structure of the
 // data fields and the CAN_ID.
 static void obd_callback(struct can_frame *frame) {
-    if (frame->can_id == KIA_SOUL_OBD_STEERING_WHEEL_ANGLE_CAN_ID) {
-        kia_soul_obd_steering_wheel_angle_data_s *steering_data = (kia_soul_obd_steering_wheel_angle_data_s *) frame->data;
+    if (frame->can_id == OBD_STEERING_WHEEL_ANGLE_CAN_ID) {
+        lada_vesta_obd_steering_wheel_angle_data_s *steering_data = (lada_vesta_obd_steering_wheel_angle_data_s *) frame->data;
 
-        curr_angle = steering_data->steering_wheel_angle * KIA_SOUL_OBD_STEERING_ANGLE_SCALAR;
+        curr_angle = steering_data->steering_wheel_angle * OBD_STEERING_ANGLE_SCALAR;
     }
 }
 
