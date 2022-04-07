@@ -28,10 +28,10 @@
 #define JOYSTICK_AXIS_STEER (SDL_CONTROLLER_AXIS_LEFTX)
 #define JOYSTICK_BUTTON_ENABLE_CONTROLS (SDL_CONTROLLER_BUTTON_START)
 #define JOYSTICK_BUTTON_DISABLE_CONTROLS (SDL_CONTROLLER_BUTTON_BACK)
-#define JOYSTICK_BUTTON_P_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_A)
-#define JOYSTICK_BUTTON_R_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_B)
-#define JOYSTICK_BUTTON_N_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_X)
-#define JOYSTICK_BUTTON_D_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_Y)
+#define JOYSTICK_BUTTON_P_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_X)
+#define JOYSTICK_BUTTON_R_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_Y)
+#define JOYSTICK_BUTTON_N_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_B)
+#define JOYSTICK_BUTTON_D_SELECTOR_POSITION (SDL_CONTROLLER_BUTTON_A)
 #define STEERING_RANGE_PERCENTAGE (0.2)
 #define BRAKES_ENABLED_MIN (0.05)
 #define JOYSTICK_DELAY_INTERVAL (50000)
@@ -455,7 +455,7 @@ static int command_selector() {
             return_code_d == OSCC_OK) {
 
             //Check only one button pressed
-            if ((p_button_current + p_button_current + p_button_current + p_button_current) == 1) {
+            if ((p_button_current + r_button_current + n_button_current + d_button_current) == 1) {
                 if (p_button_current) {
                     request_position = 'P';
                 } else if (r_button_current) {
@@ -469,6 +469,8 @@ static int command_selector() {
                 printf("Selector position: %c\n", request_position);
 
                 return_code = oscc_publish_selector_position(request_position);
+            } else {
+                return_code = return_code_p || return_code_r || return_code_n || return_code_d;
             }
 
         }
